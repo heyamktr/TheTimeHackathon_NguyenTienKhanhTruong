@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <link href="brainrot-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <title>Tiger Time 🧠💥</title>
+</head>
+<style>
+    @font-face { font-family: ComicSans; src: url(fonts/ComicSansMS.ttf); }
+    @font-face { font-family: Impact; src: url(fonts/Impact.ttf); }
+</style>
+<body onload="startTime()">
+    <!-- Background Video -->
+    <video autoplay muted loop class="bg-video">
+        <source src="img/Subway Surfers (2024) - Gameplay [4K 9x16] No Copyright.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <header class="top-row">
+            <div class="title-container">
+                <h1 id="branding">tiger time</h1>
+            </div>
+            <div class="time-container">
+                <h1 id="time"></h1>
+            </div>
+        </header>
+        <main class="main-content">
+            <img src="img/braintiger.png" alt="Tiger" class="tiger-image">
+        </main>
+        <footer class="bottom-row">
+            <div class="music-container">
+               
+            <div class="button-container">
+                <button onclick="window.location.href='index.html'" class="btn brainrot-btn">tiger mode</button>
+                <button onclick="showMotivation()" class="btn motivation-btn">motivation!</button>
+                <button onclick="showTimePicker()" class="btn pomodoro-btn">pomodoro</button>
+            </div>
+        </footer>
+    </div>
+
+    <div id="pom-timer" class="pom-timer">
+        <i id="exit" class="fas fa-times" onclick="closePomTimer()"></i>
+        <div id="time-picker">
+            <h4>SET BRAINROT TIME 🧠💥</h4>
+            <input type="number" id="minutes-input" min="1" max="60" placeholder="Minutes" value="25">
+            <button onclick="setPomodoroTime()">Set Time</button>
+        </div>
+        <h4 id="phrase">Time to Grind! 🚀</h4>
+        <h1 id="countdown">25:00</h1>
+        <div class="pom-btn">
+            <i id="pom-play" class="fas fa-play-circle" onclick="playcountdown()"></i>
+            <i id="pom-pause" class="fas fa-pause-circle" onclick="pausecountdown()"></i>
+        </div>
+    </div>
+
+    <div id="motivation-popup" class="motivation-popup">
+        <i id="close-motivation" class="fas fa-times" onclick="closeMotivation()"></i>
+        <h2 id="motivation-quote"></h2>
+    </div>
+
+    <div class="task-menu">
+        <i id="close-task-menu" class="fas fa-times" onclick="closeTaskMenu()"></i>
+        <h1>to-do list</h1>
+        <ul id="task-list">
+            <li>
+                <input type="checkbox" id="task-1">
+                <label for="task-1">Your Task Text Here</label>
+                <i class="fas fa-trash-alt" onclick="deleteTask(this)"></i>
+            </li>
+        </ul>
+        <div class="add-task">
+            <input type="text" id="new-task" placeholder="Add a new task">
+            <button onclick="addTask()">Add</button>
+        </div>
+    </div>
+
+    <!-- Floating Images -->
+    <img src="img/brainrot1.jpeg" class="floating-image image1" alt="Floating Meme 1">
+    <img src="img/brainrot2.jpg" class="floating-image image2" alt="Floating Meme 2">
+    <img src="img/brainrot3.jpg" class="floating-image image3" alt="Floating Meme 3">
+
+    <script>
+        let timerInterval;
+        let timeLeft;
+        let isPaused = true;
+        const quotes = [
+            "YOU STUDY OR YOU DIE 🇮🇹📚",
+            "SKIBIDI TOILET MOTIVATION 🚽💪",
+            "GRIND OR GET OHIO’D 😭🔥",
+            "BECOME THE SIGMA GRINDER 🦁💸",
+            "NO OHIO VIBES, ONLY STUDY VIBES 😤📖"
+        ];
+
+        function startTime() {
+            const now = new Date();
+            document.getElementById('time').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            setInterval(startTime, 1000);
+        }
+
+        function toggleTaskMenu() {
+            const taskMenu = document.querySelector('.task-menu');
+            taskMenu.style.transform = taskMenu.style.transform === 'translateX(0)' ? 'translateX(-100%)' : 'translateX(0)';
+        }
+
+        function showTimePicker() {
+            const pomTimer = document.getElementById('pom-timer');
+            pomTimer.style.display = 'block';
+            document.getElementById('time-picker').style.display = 'block';
+            document.getElementById('countdown').style.display = 'none';
+            document.getElementById('pom-play').style.display = 'none';
+            document.getElementById('pom-pause').style.display = 'none';
+            document.getElementById('phrase').innerText = 'SET BRAINROT TIME 🧠💥';
+        }
+
+        function setPomodoroTime() {
+            const minutes = parseInt(document.getElementById('minutes-input').value) || 25;
+            if (isNaN(minutes) || minutes < 1 || minutes > 60) {
+                alert('Please enter a valid time between 1 and 60 minutes!');
+                return;
+            }
+            timeLeft = minutes * 60;
+            document.getElementById('countdown').innerText = `${minutes}:00`;
+            document.getElementById('time-picker').style.display = 'none';
+            document.getElementById('countdown').style.display = 'block';
+            document.getElementById('pom-play').style.display = 'inline';
+            document.getElementById('pom-pause').style.display = 'none';
+            document.getElementById('phrase').innerText = 'Time to Grind! 🚀';
+            isPaused = true;
+        }
+
+        function playcountdown() {
+            if (isPaused && timeLeft !== undefined) {
+                isPaused = false;
+                document.getElementById('pom-play').style.display = 'none';
+                document.getElementById('pom-pause').style.display = 'inline';
+                timerInterval = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        document.getElementById('countdown').innerText = '00:00';
+                        document.getElementById('phrase').innerText = 'BRAINROT COMPLETE! 🎉';
+                        isPaused = true;
+                        document.getElementById('pom-play').style.display = 'inline';
+                        document.getElementById('pom-pause').style.display = 'none';
+                        return;
+                    }
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    document.getElementById('countdown').innerText = 
+                        `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                }, 1000);
+            }
+        }
+
+        function pausecountdown() {
+            if (!isPaused) {
+                isPaused = true;
+                clearInterval(timerInterval);
+                document.getElementById('pom-play').style.display = 'inline';
+                document.getElementById('pom-pause').style.display = 'none';
+            }
+        }
+
+        function closePomTimer() {
+            document.getElementById('pom-timer').style.display = 'none';
+            clearInterval(timerInterval);
+            isPaused = true;
+            document.getElementById('pom-play').style.display = 'inline';
+            document.getElementById('pom-pause').style.display = 'none';
+        }
+
+        function showMotivation() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('motivation-quote').innerText = randomQuote;
+            document.getElementById('motivation-popup').style.display = 'block';
+        }
+
+        function closeMotivation() {
+            document.getElementById('motivation-popup').style.display = 'none';
+        }
+
+        
+
+        document.getElementById('icon').addEventListener('click', toggleTheme);
+
+      
+    </script>
+</body>
+</html>
