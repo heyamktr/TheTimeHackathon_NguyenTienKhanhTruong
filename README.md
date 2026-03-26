@@ -43,13 +43,11 @@ Then open `http://localhost:8000`.
 
 ## Demo Video
 
-Paste your demo link here:
+[![Watch the demo](https://img.youtube.com/vi/Gz3BMQVahpA/maxresdefault.jpg)](https://youtu.be/Gz3BMQVahpA)
 
-```md
-[Watch the demo]((https://youtu.be/Gz3BMQVahpA))
-```
+[Watch the demo on YouTube](https://youtu.be/Gz3BMQVahpA)
 
-If you want the video to render directly on GitHub and your host supports embeds, you can also replace that with a thumbnail image linking to the video.
+GitHub README files do not support inline YouTube playback, so the standard approach is a clickable thumbnail that opens the video.
 
 ## Pages
 
