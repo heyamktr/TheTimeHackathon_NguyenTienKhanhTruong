@@ -45,7 +45,7 @@ Then open `http://localhost:8000`.
 
 [![Watch the demo](https://img.youtube.com/vi/Gz3BMQVahpA/maxresdefault.jpg)](https://youtu.be/Gz3BMQVahpA)
 
-[Watch the demo on YouTube](https://youtu.be/Gz3BMQVahpA)
+[Watch the demo on YouTube](https://youtu.be/qURAf3fxYKg)
 
 GitHub README files do not support inline YouTube playback, so the standard approach is a clickable thumbnail that opens the video.
 
