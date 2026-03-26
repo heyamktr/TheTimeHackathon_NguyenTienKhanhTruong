@@ -43,7 +43,7 @@ Then open `http://localhost:8000`.
 
 ## Demo Video
 
-[![Watch the demo](https://img.youtube.com/vi/Gz3BMQVahpA/maxresdefault.jpg)](https://youtu.be/Gz3BMQVahpA)
+[![Watch the demo](https://img.youtube.com/vi/qURAf3fxYKg/maxresdefault.jpg)](https://youtu.be/qURAf3fxYKg)
 
 [Watch the demo on YouTube](https://youtu.be/qURAf3fxYKg)
 
