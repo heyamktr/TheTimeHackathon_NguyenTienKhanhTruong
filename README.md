@@ -2,6 +2,10 @@
 
 Tiger Time is a static productivity web app built for a hackathon. It combines a study-focused timer experience with music, motivational quotes, a lightweight to-do list, a mini calendar, and an alternate "Brainrot Mode" for a more chaotic study vibe.
 
+## Live Demo
+
+[Open the deployed app](https://the-time-hackathon-nguyen-tien-khan-sigma.vercel.app/)
+
 ## Features
 
 - Pomodoro timer for study and break sessions
