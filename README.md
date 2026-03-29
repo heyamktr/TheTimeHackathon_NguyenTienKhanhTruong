@@ -80,6 +80,7 @@ The alternate page in `brainrot-timer.html` includes:
 ## Tech Stack
 
 - HTML
+- Google Map API
 - CSS
 - Vanilla JavaScript
 - Font Awesome
